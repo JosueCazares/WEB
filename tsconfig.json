@@ -11,7 +11,7 @@
     "moduleResolution": "bundler",
     "paths": {
       "@/*": [
-        "/src/*"
+        "src/*"
       ]
     },
     "resolveJsonModule": true,
@@ -28,8 +28,8 @@
     "skipLibCheck": true
   },
   "include": [
-    "/src/**/*",
-    "/src/**/*.vue"
+    "src/**/*",
+    "src/**/*.vue"
   ],
   "exclude": [
     "dist",
