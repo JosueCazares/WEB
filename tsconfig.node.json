@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "composite": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".", // Base directory to resolve non-relative paths
+    "paths": {
+      "@/*": ["src/*"] // Define alias for '@' to point to 'src'
+    },
+    "esModuleInterop": true, // Ensure compatibility with CommonJS modules
+    "target": "ESNext", // Set the target ECMAScript version
+    "types": ["vite/client"] // Include types for Vite
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue", // Include Vue files
+    "vite.config.ts" // Include Vite configuration
+  ],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

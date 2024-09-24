@@ -1,0 +1,5 @@
+<template>
+    <div class="tw-flex tw-justify-center tw-items-center ">
+        <h1>Hello World</h1>
+    </div>
+</template>
