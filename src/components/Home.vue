@@ -1,7 +1,7 @@
 <template>
     <NavBar />
-    <div class="tw-flex tw-justify-center tw-items-center ">
-        <h1>Hello World</h1>
+    <div class="tw-flex tw-justify-center tw-items-center pt-10">
+        <router-view></router-view>
     </div>
 </template>
 <script setup>
