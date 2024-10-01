@@ -15,6 +15,7 @@ module.exports = {
     colors: {
     
       'color-base': '#F4F4F4',
+      'color-green': '#64B5F6',
      
     },
     fontFamily: {
