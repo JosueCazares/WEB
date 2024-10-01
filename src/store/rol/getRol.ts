@@ -27,7 +27,7 @@ export const useRolStore = defineStore('rol', () => {
                 return;
             }
             roles.value = response.data;
-            //console.log(roles.value);
+           // console.log(roles.value);
             loading.value = false;
         } catch (e) {
             console.error('Error en getRoles =>', e);

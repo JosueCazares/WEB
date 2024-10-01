@@ -27,10 +27,24 @@ export interface Usuario  {
     contrasena: string;
     estatus: Estatus;
     fechaCreacion: Date;
-    rolId: number;
+    rol: string;
+}
+
+export interface Aspirante{
+    nombre      : string,
+    email       : string,
+    telefono    :string,
+    curp       :string,
+    username   : string,
+    carrera_deseada : string,
+    status    : Status
 }
 
 export interface Estatus {
     ACTIVO
     INACTIVO
+  }
+export interface Status {
+    ACEPTADO
+    RECHAZADO
   }

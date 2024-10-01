@@ -31,8 +31,18 @@
                     </router-link>
                 </v-col>
                 <v-col cols="12" class="">
+                    <router-link to="/aspirantes">
+                        <v-btn block size="large" variant="outlined" v-if="rol === '3'">ASPIRANTES</v-btn>
+                    </router-link>
+                </v-col>
+                <v-col cols="12" class="">
                     <router-link to="/rol">
                         <v-btn block size="large" variant="outlined" v-if="rol === '2'">Roles</v-btn>
+                    </router-link>
+                </v-col>
+                <v-col cols="12" class="">
+                    <router-link to="/rol">
+                        <v-btn block size="large" variant="outlined" v-if="rol === '2'">COTRASEÑA</v-btn>
                     </router-link>
                 </v-col>
                 <v-col cols="12" class="" v-if="rol === '2'">
@@ -64,7 +74,6 @@ const drawer = ref(false);
 const router = useRouter()
 
 rol.value = sessionStorage.getItem('rol')
-console.log("ROL:" + rol.value);
 const logout = () => {
     sessionStorage.removeItem('token')
     sessionStorage.removeItem('rol')
