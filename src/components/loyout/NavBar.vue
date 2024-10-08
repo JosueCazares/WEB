@@ -31,6 +31,11 @@
                     </router-link>
                 </v-col>
                 <v-col cols="12" class="">
+                    <router-link to="/carreras">
+                        <v-btn block size="large" variant="outlined" v-if="rol === '3'">CARRERAS</v-btn>
+                    </router-link>
+                </v-col>
+                <v-col cols="12" class="">
                     <router-link to="/aspirantes">
                         <v-btn block size="large" variant="outlined" v-if="rol === '3'">ASPIRANTES</v-btn>
                     </router-link>
@@ -41,7 +46,7 @@
                     </router-link>
                 </v-col>
                 <v-col cols="12" class="">
-                    <router-link to="/rol">
+                    <router-link to="/contra">
                         <v-btn block size="large" variant="outlined" v-if="rol === '2'">COTRASEÑA</v-btn>
                     </router-link>
                 </v-col>
@@ -53,6 +58,11 @@
                 <v-col cols="12" class="" v-if="rol === '4'">
                     <router-link to="/personal">
                         <v-btn block size="large" variant="outlined">PERSONAL</v-btn>
+                    </router-link>
+                </v-col>
+                <v-col cols="12" class="" v-if="rol === '4'">
+                    <router-link to="/areas">
+                        <v-btn block size="large" variant="outlined">AREAS</v-btn>
                     </router-link>
                 </v-col>
 

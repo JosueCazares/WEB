@@ -172,8 +172,11 @@ const validarEmail = (email) => {
     return emailRegex.test(email);
 }
 
+
+
 const guardarUsuario = async () => {
     try {
+        const correoDuplicado = usuarios.value.map(usuario => usuario.correo)
         const isValid = await form.value.validate();
 
         if (!isValid) {
@@ -197,6 +200,10 @@ const guardarUsuario = async () => {
                 estatus: localStatus.value,
                 rol: localRol.value,
             }
+            if (correoDuplicado.includes(usuario.correo)) {
+                toast.error('El correo ya esta registrado, intenta otro', { timeout: 2000 });
+                return;
+            }
             console.log(usuario);
             UsuarioPutStore.setData(usuario);
             UsuarioPutStore.putUsuario();
@@ -210,6 +217,12 @@ const guardarUsuario = async () => {
             UsuarioPostStore.rol = localRol.value;
             UsuarioPostStore.id = localId.value;
             UsuarioPostStore.estatus = localStatus.value;
+            console.log('local ' + localCorreo.value);
+            console.log('duplicado ' + correoDuplicado);
+            if (correoDuplicado.includes(localCorreo.value)) {
+                toast.error('El correo ya esta registrado, intenta otro', { timeout: 2000 });
+                return;
+            }
             //console.log(localStatus.value);
             UsuarioPostStore.postUsuario();
             // Limpiar el formulario local

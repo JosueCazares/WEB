@@ -2,13 +2,13 @@
     <v-container>
         <v-toolbar flat>
             <v-toolbar-title class="tw-font-Roboto text-h5">
-                Becas
+                Area
             </v-toolbar-title>
             <!-- Botón para agregar nuevo usuario -->
             <v-dialog v-model="dialogo" max-width="800px">
                 <template v-slot:activator="{ props }">
                     <v-btn class="mb-2 tw-font-Roboto" color="primary" dark v-bind="props">
-                        <span class="text-h5">Agregar Beca</span>
+                        <span class="text-h5">Agregar Area</span>
                         <v-icon left>mdi-plus</v-icon>
                     </v-btn>
                 </template>
@@ -25,18 +25,7 @@
                                     <v-col cols="12" md="6">
                                         <v-text-field v-model="localNombre" label="Nombre" maxlength="70" :counter="70"
                                             :rules="nombreRules" clearable></v-text-field>
-
                                     </v-col>
-                                    <v-col cols="12" md="6">
-
-                                        <v-text-field v-model="localDescripcion" label="Descripcion" maxlength="70"
-                                            :counter="70" :rules="descripcionRules" clearable></v-text-field>
-                                    </v-col>
-                                    <v-col cols="12" md="6">
-                                        <v-select v-model="localStatus" label="Estatus" :items="['Activa', 'Inactiva']"
-                                            item-value="value"></v-select>
-                                    </v-col>
-
                                 </v-row>
                             </v-form>
                         </v-container>
@@ -45,7 +34,7 @@
                     <v-card-actions>
                         <v-spacer></v-spacer>
                         <v-btn color="blue-darken-1" variant="text" @click="cerrar">Cancelar</v-btn>
-                        <v-btn color="#00C853" variant="text" @click="guardarBeca">
+                        <v-btn color="#00C853" variant="text" @click="guardarArea">
                             <v-icon left icon="mdi-content-save" class="tw-mr-1"></v-icon>
                             Guardar
                         </v-btn>
@@ -55,80 +44,69 @@
         </v-toolbar>
         <v-card flat>
             <v-sheet>
-                <v-data-table :items="beca" :headers="headers">
-                    <!-- Slot personalizado para la columna de acciones -->
-                    <template v-slot:item.actions="{ item }">
-                        <v-icon class="tw-me-2 tw-text-color-green" icon="mdi-pencil" size="default"
-                            @click="editar(item)">
-                        </v-icon>
+                <v-data-table :items="area" :headers="headers">
+                    <template v-slot:item.catalogo_personal="{ item }">
+                        <span v-if="item.catalogo_personal.length > 0">
+                            {{ item.catalogo_personal.map(catalogo => catalogo.nombre).join(', ') }}
+                        </span>
+                        <span v-else>
+                            Sin personal
+                        </span>
                     </template>
-
                 </v-data-table>
             </v-sheet>
         </v-card>
     </v-container>
 </template>
-
 <script setup>
-import { onMounted, ref, computed } from 'vue'
-import { useBecaStore } from '@/store/beca/getBeca'
-import { useBecaPostStore } from '@/store/beca/postBeca'
+import { onMounted } from 'vue'
+import { useAreaStore } from '@/store/area/getArea'
+import { useAreaPostStore } from '@/store/area/postArea'
 import { storeToRefs } from 'pinia';
+import { ref, computed } from 'vue'
 import { useToast } from 'vue-toastification';
 
-const becaStore = useBecaStore()
-const becaPostStore = useBecaPostStore()
-const { beca } = storeToRefs(becaStore)
+const areaStore = useAreaStore()
+const areaPostStore = useAreaPostStore()
+const { area } = storeToRefs(areaStore)
 const dialogo = ref(false)
 const editedIndex = ref(-1);
 const localNombre = ref('')
-const localDescripcion = ref('')
 const toast = useToast()
 const form = ref(null)
-const localStatus = ref('')
 
 
-onMounted(() => {
-    becaStore.getBecas();
-})
-
-const headers = [
-    { title: 'Nombre', key: 'nombre' },
-    { title: 'Descripcion', key: 'descripcion' },
-    { title: 'Estatus', key: 'estatus' },
-]
-
+const tituloFormulario = computed(() => {
+    return editedIndex.value === -1 ? "Nueva Area" : "Editar Area";
+});
 const nombreRules = [
     (v) => !!v || 'El nombre es requerido',
     (v) => (v && v.length >= 3) || 'El nombre debe minimo 3 caracteres',
     (v) => (v && v.length <= 70) || 'El nombre debe tener menos de 70 caracteres',
 ]
-const descripcionRules = [
-    (v) => !!v || 'La descripcion es requerida',
-    (v) => (v && v.length >= 3) || 'La descripcion debe minimo 3 caracteres',
-    (v) => (v && v.length <= 70) || 'La descripcion debe tener menos de 70 caracteres',
+
+onMounted(() => {
+    areaStore.getArea();
+})
+
+const headers = [
+    { title: 'Nombre', key: 'nombre' },
+    { title: 'Catalogo', key: 'catalogo_personal' },
 ]
-
-const tituloFormulario = computed(() => {
-    return editedIndex.value === -1 ? "Nueva Beca" : "Editar Beca";
-});
-
 function cerrar() {
     dialogo.value = false
     localNombre.value = ''
 
 }
-
 const validarFormulario = async () => {
-    if (!localNombre.value || !localDescripcion.value) {
-        toast.error('Todos los campos son requeridos ', { timeout: 2000 })
+    if (!localNombre.value) {
+        toast.error('Todos los campos son requeridos aaaa', { timeout: 2000 })
         return false
     }
 
     return true
 }
-
-const guardarBeca = async () => {
+const guardarArea = async () => {
     try {
         const isValid = await form.value.validate();
 
@@ -141,12 +119,13 @@ const guardarBeca = async () => {
             return;
         }
 
-        await becaPostStore.postBeca(localNombre.value, localDescripcion.value, localStatus.value);
+        await areaPostStore.postArea(localNombre.value);
         cerrar();
-        await becaStore.getBecas();
+        await areaStore.getArea();
     } catch (error) {
         console.error('Error al validar el formulario:', error);
         toast.error('Ocurrió un error al validar el formulario', { timeout: 2000 });
     }
 }
+
 </script>
