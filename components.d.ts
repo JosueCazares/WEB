@@ -15,7 +15,6 @@ declare module 'vue' {
     Home: typeof import('./src/components/Home.vue')['default']
     Login: typeof import('./src/components/access/login.vue')['default']
     NavBar: typeof import('./src/components/loyout/NavBar.vue')['default']
-    Persona: typeof import('./src/components/personal/Persona.vue')['default']
     Personal: typeof import('./src/components/personal/Personal.vue')['default']
     Resultados: typeof import('./src/components/loyout/Resultados.vue')['default']
     Rol: typeof import('./src/components/rol/rol.vue')['default']
