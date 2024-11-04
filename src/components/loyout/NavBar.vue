@@ -1,14 +1,17 @@
 <template>
     <v-app-bar app class="bg-white">
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+        <router-link to="/home" v-if="rol === '1'">
+            <v-toolbar-title class="title">SUPER</v-toolbar-title>
+        </router-link>
         <router-link to="/home" v-if="rol === '2'">
-            <v-toolbar-title class="title">AREA-TI</v-toolbar-title>
+            <v-toolbar-title class="title">BIBLIO</v-toolbar-title>
         </router-link>
         <router-link to="/home" v-if="rol === '3'">
-            <v-toolbar-title class="title">AREA-SE</v-toolbar-title>
+            <v-toolbar-title class="title">ALUMNO</v-toolbar-title>
         </router-link>
         <router-link to="/home" v-if="rol === '4'">
-            <v-toolbar-title class="title">AREA-RH</v-toolbar-title>
+            <v-toolbar-title class="title">ADMIN</v-toolbar-title>
         </router-link>
     </v-app-bar>
 
@@ -17,50 +20,56 @@
             <v-row justify="center">
                 <v-col cols="12" class="">
                     <router-link to="/seleccion">
-                        <v-btn block size="large" variant="outlined" v-if="rol === '3'">SELECCION</v-btn>
+                        <v-btn block size="large" variant="outlined" v-if="rol === '1'">SELECCION</v-btn>
                     </router-link>
                 </v-col>
                 <v-col cols="12" class="">
                     <router-link to="/becas">
-                        <v-btn block size="large" variant="outlined" v-if="rol === '3'">BECAS</v-btn>
+                        <v-btn block size="large" variant="outlined" v-if="rol === '1'">BECAS</v-btn>
                     </router-link>
                 </v-col>
                 <v-col cols="12" class="">
                     <router-link to="/grupos">
-                        <v-btn block size="large" variant="outlined" v-if="rol === '3'">GRUPOS</v-btn>
+                        <v-btn block size="large" variant="outlined" v-if="rol === '1'">GRUPOS</v-btn>
                     </router-link>
                 </v-col>
                 <v-col cols="12" class="">
                     <router-link to="/carreras">
-                        <v-btn block size="large" variant="outlined" v-if="rol === '3'">CARRERAS</v-btn>
+                        <v-btn block size="large" variant="outlined" v-if="rol === '1'">CARRERAS</v-btn>
                     </router-link>
                 </v-col>
                 <v-col cols="12" class="">
                     <router-link to="/aspirantes">
-                        <v-btn block size="large" variant="outlined" v-if="rol === '3'">ASPIRANTES</v-btn>
+                        <v-btn block size="large" variant="outlined" v-if="rol === '1'">ASPIRANTES</v-btn>
                     </router-link>
                 </v-col>
                 <v-col cols="12" class="">
                     <router-link to="/rol">
-                        <v-btn block size="large" variant="outlined" v-if="rol === '2'">Roles</v-btn>
+                        <v-btn block size="large" variant="outlined" v-if="rol === '1'">Roles</v-btn>
+                    </router-link>
+                </v-col>
+                <v-col cols="12" class="">
+                    <router-link to="/libreria">
+                        <v-btn block size="large" variant="outlined"
+                            v-if="rol === '2' || rol === '3' || rol === '1'">Libreria</v-btn>
                     </router-link>
                 </v-col>
                 <v-col cols="12" class="">
                     <router-link to="/contra">
-                        <v-btn block size="large" variant="outlined" v-if="rol === '2'">COTRASEÑA</v-btn>
+                        <v-btn block size="large" variant="outlined" v-if="rol === '1'">COTRASEÑA</v-btn>
                     </router-link>
                 </v-col>
-                <v-col cols="12" class="" v-if="rol === '2'">
+                <v-col cols="12" class="" v-if="rol === '4' || rol === '1'">
                     <router-link to="/usuario">
                         <v-btn block size="large" variant="outlined">Usuarios</v-btn>
                     </router-link>
                 </v-col>
-                <v-col cols="12" class="" v-if="rol === '4'">
+                <v-col cols="12" class="" v-if="rol === '1'">
                     <router-link to="/personal">
                         <v-btn block size="large" variant="outlined">PERSONAL</v-btn>
                     </router-link>
                 </v-col>
-                <v-col cols="12" class="" v-if="rol === '4'">
+                <v-col cols="12" class="" v-if="rol === '1'">
                     <router-link to="/areas">
                         <v-btn block size="large" variant="outlined">AREAS</v-btn>
                     </router-link>

@@ -11,6 +11,7 @@ declare module 'vue' {
     Aspirante: typeof import('./src/components/seleccion/Aspirante.vue')['default']
     Becas: typeof import('./src/components/becas/Becas.vue')['default']
     Carreras: typeof import('./src/components/grupos/Carreras.vue')['default']
+    Catalogo: typeof import('./src/components/libreria/Catalogo.vue')['default']
     Contrasena: typeof import('./src/components/usuario/Contrasena.vue')['default']
     Formulario: typeof import('./src/components/seleccion/Formulario.vue')['default']
     Grupos: typeof import('./src/components/grupos/Grupos.vue')['default']

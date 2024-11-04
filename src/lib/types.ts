@@ -144,4 +144,15 @@ export interface Catalogo_personal {
     INFORMATICA
   }
 
+  export interface Libro{
+    id: number,
+    titulo: string,
+    autor: string,
+    genero: string,
+    estatus: Estatus,
+    universidad: string,
+    created_at: string,
+    updated_at: string,
+    url: string,
+  }
   

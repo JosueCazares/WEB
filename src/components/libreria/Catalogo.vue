@@ -1,5 +1,6 @@
 <template>
-    <v-container>
+    <!-- SOLAMENTE TENDRA ACCESO EL ROL 1 DE SUPERADMIN Y BIBLIOTECARIO A LAS MODIIFCACIONES DE LIBROS -->
+    <v-container v-if="rol === '1' || rol === '2'">
         <v-toolbar flat>
             <v-toolbar-title class="tw-font-Roboto text-h5">
                 LIBROS
@@ -75,6 +76,30 @@
                     <template v-slot:item.actions="{ item }">
                         <v-icon class="tw-me-2 tw-text-color-green" icon="mdi-pencil" size="default"
                             @click="editar(item)"></v-icon>
+                        <v-icon class="tw-me-2" color="red" icon="mdi-file-pdf-box" size="x-large"
+                            @click="abrirPdf(item)"></v-icon>
+                    </template>
+                </v-data-table>
+            </v-sheet>
+        </v-card>
+    </v-container>
+    <v-container v-else>
+        <v-toolbar flat>
+            <v-toolbar-title class="tw-font-Roboto text-h5">
+                LIBROS
+            </v-toolbar-title>
+            <v-dialog v-model="dialogoPdf">
+                <v-card>
+                    <v-card-text width="auto" height="auto">
+                        <iframe :src="pdfUrl" width="100%" height="1000" type="application/pdf"></iframe>
+                    </v-card-text>
+                </v-card>
+            </v-dialog>
+        </v-toolbar>
+        <v-card flat>
+            <v-sheet>
+                <v-data-table :items="libros" :headers="headers">
+                    <template v-slot:item.actions="{ item }">
                         <v-icon class="tw-me-2" color="red" icon="mdi-file-pdf-box" size="x-large"
                             @click="abrirPdf(item)"></v-icon>
                     </template>

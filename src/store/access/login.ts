@@ -20,7 +20,7 @@ export const useLoginStore = defineStore('login', () => {
                 correo:email.value,
                 contrasena:password.value
             }
-            //console.log(body);
+           // console.log(body);
             const response = await httpAPI<APIResponse<LoginResponseData>>('/access/login', 'POST', body);
             if (response.status != 'success') {
                 console.error('Error al iniciar Sesion =>', error)

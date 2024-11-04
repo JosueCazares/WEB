@@ -13,6 +13,7 @@ const routes: RouteRecordRaw[] = [
         meta: {requiresAuth: true },
         children: [
             {path: '/rol', component: () => import('@/components/rol/rol.vue')},
+            {path: '/libreria', component: () => import('@/components/libreria/Catalogo.vue')},
             {path: '/usuario', component: () => import('@/components/usuario/Usuario.vue')},
             {path: '/contra', component: () => import('@/components/usuario/Contrasena.vue')},
             {path: '/becas', component: () => import('@/components/becas/Becas.vue')},
@@ -49,7 +50,13 @@ router.beforeEach((to, from, next) => {
         })
         return next('/login');
       }
-      if (rol !== '2' && (to.path === '/usuario' || to.path ==='/rol' || to.path==='/contra')) {
+      if ((rol !== '4' && rol !=='1') && (to.path === '/usuario' || to.path ==='/rol' || to.path==='/contra')) {
+        toas.error('Acceso denegado', {
+          timeout: 2000
+        });
+        return next('/home');
+      }
+      if((rol !=='3' && rol !=='2' && rol !=='1') && (to.path === '/libreria')){
         toas.error('Acceso denegado', {
           timeout: 2000
         });
